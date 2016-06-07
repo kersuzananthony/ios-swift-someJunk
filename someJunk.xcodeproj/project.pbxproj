@@ -23,6 +23,7 @@
 		DC38234D1CDB13FE007BB343 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3823451CDB13FE007BB343 /* Store.swift */; };
 		DC3823521CDB191B007BB343 /* MaterialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3823511CDB191B007BB343 /* MaterialView.swift */; };
 		DC3823551CDB1B12007BB343 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3823541CDB1B12007BB343 /* ItemCell.swift */; };
+		DC81CF951D06B5E90084E531 /* ItemDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC81CF941D06B5E90084E531 /* ItemDetailsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		DC3823451CDB13FE007BB343 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		DC3823511CDB191B007BB343 /* MaterialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialView.swift; sourceTree = "<group>"; };
 		DC3823541CDB1B12007BB343 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		DC81CF941D06B5E90084E531 /* ItemDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				DC38232B1CDB1029007BB343 /* MainVC.swift */,
+				DC81CF941D06B5E90084E531 /* ItemDetailsVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				DC3823551CDB1B12007BB343 /* ItemCell.swift in Sources */,
 				DC3823481CDB13FE007BB343 /* ItemType+CoreDataProperties.swift in Sources */,
 				DC38234C1CDB13FE007BB343 /* Store+CoreDataProperties.swift in Sources */,
+				DC81CF951D06B5E90084E531 /* ItemDetailsVC.swift in Sources */,
 				DC38234D1CDB13FE007BB343 /* Store.swift in Sources */,
 				DC3823321CDB1029007BB343 /* someJunk.xcdatamodeld in Sources */,
 				DC3823461CDB13FE007BB343 /* Item+CoreDataProperties.swift in Sources */,
@@ -366,6 +370,7 @@
 				DC38233D1CDB1029007BB343 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

@@ -20,18 +20,43 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        attemptFetch()
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if let sections = fetchResultController.sections {
+            return sections.count
+        }
+        
         return 0
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let sections = self.fetchResultController.sections {
+            let sectionInfo = sections[section]
+            return sectionInfo.numberOfObjects
+        }
+        
         return 0
     }
+    
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("ItemCell", forIndexPath: indexPath) as! ItemCell
+        configureCell(cell, indexPath: indexPath)
+        
+        return cell
+    }
+    
+    func configureCell(cell: ItemCell, indexPath: NSIndexPath) {
+        if let record = self.fetchResultController.objectAtIndexPath(indexPath) as? Item {
+            cell.configureCell(record)
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 132.0
     }
 }
 
@@ -62,11 +87,11 @@ extension MainVC: NSFetchedResultsControllerDelegate {
         self.fetchResultController = controller
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
         tableView.beginUpdates()
     }
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
         tableView.endUpdates()
     }
     
@@ -87,10 +112,9 @@ extension MainVC: NSFetchedResultsControllerDelegate {
         case .Update:
             if let indexPath = indexPath {
                 let cell = tableView.cellForRowAtIndexPath(indexPath) as! ItemCell
-                // Update cell data
+                configureCell(cell, indexPath: indexPath)
             }
             break
-            
             
         case .Move:
             if let indexPath = indexPath {
@@ -103,6 +127,26 @@ extension MainVC: NSFetchedResultsControllerDelegate {
             
             break
         } // End swith statement
+    }
+    
+    func generateTestData() {
+        let item = NSEntityDescription.insertNewObjectForEntityForName("Item", inManagedObjectContext: appDelegate.managedObjectContext) as! Item
+        item.title = "Title of my object"
+        item.details = "I dont know if this object is cool or not"
+        item.price = 100.0
+        
+        let item2 = NSEntityDescription.insertNewObjectForEntityForName("Item", inManagedObjectContext: appDelegate.managedObjectContext) as! Item
+        item2.title = "Title of my second object"
+        item2.details = "I dont know if this second object is cool or not"
+        item2.price = 200.0
+
+        
+        let item3 = NSEntityDescription.insertNewObjectForEntityForName("Item", inManagedObjectContext: appDelegate.managedObjectContext) as! Item
+        item3.title = "Title of my third object"
+        item3.details = "I dont know if this third object is cool or not"
+        item3.price = 300.0
+
+        appDelegate.saveContext()
     }
 }
 

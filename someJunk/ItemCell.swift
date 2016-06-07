@@ -15,5 +15,9 @@ class ItemCell: UITableViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var detailsLabel: UILabel!
     
-    
+    func configureCell(item: Item) {
+        self.titleLabel.text = item.title
+        self.priceLabel.text = "$\(item.price!)"
+        self.detailsLabel.text = item.details
+    }
 }
