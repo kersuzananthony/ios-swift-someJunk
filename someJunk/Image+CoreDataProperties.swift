@@ -14,7 +14,7 @@ import CoreData
 
 extension Image {
 
-    @NSManaged var image: NSObject?
+    @NSManaged var image: Image?
     @NSManaged var items: NSSet?
     @NSManaged var stores: NSSet?
 

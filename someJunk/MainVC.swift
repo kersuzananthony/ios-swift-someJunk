@@ -58,6 +58,22 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 132.0
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let objects = self.fetchResultController.fetchedObjects where objects.count > 0 {
+            let item = objects[indexPath.row] as! Item
+            
+            performSegueWithIdentifier("ItemDetailsVC", sender: item)
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ItemDetailsVC" {
+            if let destinationVC = segue.destinationViewController as? ItemDetailsVC, let item = sender as? Item {
+                destinationVC.itemToEdit = item
+            }
+        }
+    }
 }
 
 extension MainVC: NSFetchedResultsControllerDelegate {

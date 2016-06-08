@@ -17,6 +17,7 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     @IBOutlet weak var detailsField: UITextField!
     
     var stores: [Store] = [Store]()
+    var itemToEdit: Item?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         self.storePicker.dataSource = self
         
         getStores()
+        manageEditForm()
 //        
 //        let store1 = NSEntityDescription.insertNewObjectForEntityForName("Store", inManagedObjectContext: appDelegate.managedObjectContext) as! Store
 //        store1.name = "Casino"
@@ -60,6 +62,26 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         }
     }
     
+    func manageEditForm() {
+        if let item = self.itemToEdit {
+            if let title = item.title {
+                self.titleField.text = title
+            }
+            
+            if let details = item.details {
+                self.detailsField.text = details
+            }
+            
+            if let price = item.price {
+                self.priceField.text = "\(price)"
+            }
+            
+            if let store = item.store, let index = stores.indexOf(store) {
+                self.storePicker.selectRow(index, inComponent: 0, animated: false)
+            }
+        }
+    }
+    
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -80,7 +102,13 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     @IBAction func savePressed(sender: UIButton) {
         if validateForm() {
-            let item = NSEntityDescription.insertNewObjectForEntityForName("Item", inManagedObjectContext: appDelegate.managedObjectContext) as! Item
+            var item: Item!
+            
+            if self.itemToEdit == nil {
+                item = NSEntityDescription.insertNewObjectForEntityForName("Item", inManagedObjectContext: appDelegate.managedObjectContext) as! Item
+            } else {
+                item = itemToEdit
+            }
             
             item.title = titleField.text
             item.details = detailsField.text
