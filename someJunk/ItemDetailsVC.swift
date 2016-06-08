@@ -18,6 +18,9 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     var stores: [Store] = [Store]()
     var itemToEdit: Item?
+    var itemImage: Image?
+    
+    var imagePickerViewController: UIImagePickerController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +30,8 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         
         getStores()
         manageEditForm()
-//        
+
+        
 //        let store1 = NSEntityDescription.insertNewObjectForEntityForName("Store", inManagedObjectContext: appDelegate.managedObjectContext) as! Store
 //        store1.name = "Casino"
 //        
@@ -98,6 +102,15 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
+    }
+    
+    @IBAction func deletePressed(sender: UIBarButtonItem) {
+        if itemToEdit != nil {
+            appDelegate.managedObjectContext.deleteObject(itemToEdit!)
+            appDelegate.saveContext()
+        }
+        
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func savePressed(sender: UIButton) {

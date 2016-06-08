@@ -141,7 +141,7 @@
             </objects>
             <point key="canvasLocation" x="1130" y="387"/>
         </scene>
-        <!--Item DetailsVC-->
+        <!--Title-->
         <scene sceneID="jJK-Yi-nz6">
             <objects>
                 <viewController id="sHp-6X-96W" customClass="ItemDetailsVC" customModule="someJunk" customModuleProvider="target" sceneMemberID="viewController">
@@ -261,6 +261,14 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="YeV-zU-pGV">
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="G38-OG-dQj">
+                            <color key="tintColor" red="1" green="0.0" blue="0.0092708704513446705" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="sHp-6X-96W" id="aKv-FV-E6h"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="detailsField" destination="HG5-b0-Sbg" id="ruC-Ue-m3K"/>
                         <outlet property="priceField" destination="Gvr-GB-2Co" id="Aoy-fa-BFp"/>
