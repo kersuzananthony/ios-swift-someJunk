@@ -32,6 +32,14 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return 0
     }
     
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if let sections = self.fetchResultController.sections {
+            return sections[section].name
+        } else {
+            return "Undefined Section"
+        }
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let sections = self.fetchResultController.sections {
             let sectionInfo = sections[section]
@@ -74,6 +82,11 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    
+    @IBAction func segmentControlPressed(sender: UISegmentedControl) {
+        attemptFetch()
+        self.tableView.reloadData()
+    }
 }
 
 extension MainVC: NSFetchedResultsControllerDelegate {
@@ -91,6 +104,8 @@ extension MainVC: NSFetchedResultsControllerDelegate {
     
     func setFetchedResults() {
         let section: String? = self.segment.selectedSegmentIndex == 1 ? "store.name" : nil
+        
+        print(section)
         
         let fetchRequest = NSFetchRequest(entityName: "Item")
         let sortDescriptor = NSSortDescriptor(key: "created_at", ascending: true)

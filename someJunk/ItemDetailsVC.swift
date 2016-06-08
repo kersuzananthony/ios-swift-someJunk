@@ -17,6 +17,7 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     @IBOutlet weak var detailsField: UITextField!
     @IBOutlet weak var selectImageButton: UIButton!
     @IBOutlet weak var itemImageView: UIImageView!
+    @IBOutlet weak var addStoreButton: UIButton!
     
     var stores: [Store] = [Store]()
     var itemToEdit: Item?
@@ -33,6 +34,7 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         self.detailsField.delegate = self
     
         manageEditForm()
+        manageAddStoreButton()
 
         self.imagePickerViewController = UIImagePickerController()
         self.imagePickerViewController.delegate = self
@@ -40,25 +42,7 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ItemDetailsVC.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-//        let store1 = NSEntityDescription.insertNewObjectForEntityForName("Store", inManagedObjectContext: appDelegate.managedObjectContext) as! Store
-//        store1.name = "Casino"
-//        
-//        let store2 = NSEntityDescription.insertNewObjectForEntityForName("Store", inManagedObjectContext: appDelegate.managedObjectContext) as! Store
-//        store2.name = "Carrefour"
-//        
-//        let store3 = NSEntityDescription.insertNewObjectForEntityForName("Store", inManagedObjectContext: appDelegate.managedObjectContext) as! Store
-//        store3.name = "Auchan"
-//        
-//        let store4 = NSEntityDescription.insertNewObjectForEntityForName("Store", inManagedObjectContext: appDelegate.managedObjectContext) as! Store
-//        store4.name = "Wall Mart"
-//        
-//        let store5 = NSEntityDescription.insertNewObjectForEntityForName("Store", inManagedObjectContext: appDelegate.managedObjectContext) as! Store
-//        store5.name = "Amazon"
-//        
-//        let store6 = NSEntityDescription.insertNewObjectForEntityForName("Store", inManagedObjectContext: appDelegate.managedObjectContext) as! Store
-//        store6.name = "Jing Dong"
-//        
-//        appDelegate.saveContext()
+        // generateStoreData()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -114,6 +98,12 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 self.itemImageView.image = image
                 self.selectImageButton.setImage(nil, forState: UIControlState.Normal)
             }
+        }
+    }
+    
+    func manageAddStoreButton() {
+        if itemToEdit != nil {
+            self.addStoreButton.hidden = true
         }
     }
     
@@ -222,6 +212,32 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         alertController.addAction(cancelAction)
         
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func addStorePressed(sender: UIButton) {
+        
+    }
+    
+    func generateStoreData() {
+        let store1 = NSEntityDescription.insertNewObjectForEntityForName("Store", inManagedObjectContext: appDelegate.managedObjectContext) as! Store
+        store1.name = "Casino"
+        
+        let store2 = NSEntityDescription.insertNewObjectForEntityForName("Store", inManagedObjectContext: appDelegate.managedObjectContext) as! Store
+        store2.name = "Carrefour"
+        
+        let store3 = NSEntityDescription.insertNewObjectForEntityForName("Store", inManagedObjectContext: appDelegate.managedObjectContext) as! Store
+        store3.name = "Auchan"
+        
+        let store4 = NSEntityDescription.insertNewObjectForEntityForName("Store", inManagedObjectContext: appDelegate.managedObjectContext) as! Store
+        store4.name = "Wall Mart"
+        
+        let store5 = NSEntityDescription.insertNewObjectForEntityForName("Store", inManagedObjectContext: appDelegate.managedObjectContext) as! Store
+        store5.name = "Amazon"
+        
+        let store6 = NSEntityDescription.insertNewObjectForEntityForName("Store", inManagedObjectContext: appDelegate.managedObjectContext) as! Store
+        store6.name = "Jing Dong"
+        
+        appDelegate.saveContext()
     }
 }
 

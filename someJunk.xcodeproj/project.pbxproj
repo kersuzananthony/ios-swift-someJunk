@@ -24,6 +24,7 @@
 		DC3823521CDB191B007BB343 /* MaterialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3823511CDB191B007BB343 /* MaterialView.swift */; };
 		DC3823551CDB1B12007BB343 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3823541CDB1B12007BB343 /* ItemCell.swift */; };
 		DC4E12301D080D2200AEAF0A /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E122F1D080D2200AEAF0A /* CustomTextField.swift */; };
+		DC4E12321D08253A00AEAF0A /* AddStoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E12311D08253A00AEAF0A /* AddStoreVC.swift */; };
 		DC81CF951D06B5E90084E531 /* ItemDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC81CF941D06B5E90084E531 /* ItemDetailsVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		DC3823511CDB191B007BB343 /* MaterialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialView.swift; sourceTree = "<group>"; };
 		DC3823541CDB1B12007BB343 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		DC4E122F1D080D2200AEAF0A /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		DC4E12311D08253A00AEAF0A /* AddStoreVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStoreVC.swift; sourceTree = "<group>"; };
 		DC81CF941D06B5E90084E531 /* ItemDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +124,7 @@
 			children = (
 				DC38232B1CDB1029007BB343 /* MainVC.swift */,
 				DC81CF941D06B5E90084E531 /* ItemDetailsVC.swift */,
+				DC4E12311D08253A00AEAF0A /* AddStoreVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				DC38234C1CDB13FE007BB343 /* Store+CoreDataProperties.swift in Sources */,
 				DC81CF951D06B5E90084E531 /* ItemDetailsVC.swift in Sources */,
 				DC38234D1CDB13FE007BB343 /* Store.swift in Sources */,
+				DC4E12321D08253A00AEAF0A /* AddStoreVC.swift in Sources */,
 				DC3823321CDB1029007BB343 /* someJunk.xcdatamodeld in Sources */,
 				DC3823461CDB13FE007BB343 /* Item+CoreDataProperties.swift in Sources */,
 				DC38232A1CDB1029007BB343 /* AppDelegate.swift in Sources */,
