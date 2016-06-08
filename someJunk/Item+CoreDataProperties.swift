@@ -18,8 +18,8 @@ extension Item {
     @NSManaged var details: String?
     @NSManaged var price: NSNumber?
     @NSManaged var created_at: NSDate?
-    @NSManaged var store: NSManagedObject?
-    @NSManaged var image: NSManagedObject?
-    @NSManaged var itemType: NSManagedObject?
+    @NSManaged var store: Store?
+    @NSManaged var image: Image?
+    @NSManaged var itemType: ItemType?
 
 }

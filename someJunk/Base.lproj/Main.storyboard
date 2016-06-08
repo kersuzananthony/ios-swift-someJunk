@@ -207,6 +207,9 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="materialDesign" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="savePressed:" destination="sHp-6X-96W" eventType="touchUpInside" id="eaU-wl-LxG"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dp-hO-GKA">
                                 <rect key="frame" x="20" y="84" width="140" height="139"/>
@@ -258,6 +261,12 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="detailsField" destination="HG5-b0-Sbg" id="ruC-Ue-m3K"/>
+                        <outlet property="priceField" destination="Gvr-GB-2Co" id="Aoy-fa-BFp"/>
+                        <outlet property="storePicker" destination="X27-Hh-cp4" id="6cE-Tg-nwi"/>
+                        <outlet property="titleField" destination="XFR-kW-Nad" id="Z22-Of-YOU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ozs-Pp-ffZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
