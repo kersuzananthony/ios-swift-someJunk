@@ -8,10 +8,21 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 
 class Image: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
+    func setItemImage(img: UIImage) {
+        self.image = img
+    }
+    
+    func getItemImg() -> UIImage? {
+        if let img = self.image as? UIImage {
+            return img
+        }
+        
+        return nil
+    }
 
 }

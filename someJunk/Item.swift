@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 
 class Item: NSManagedObject {
@@ -18,5 +19,4 @@ class Item: NSManagedObject {
         
         self.created_at = NSDate() // Current date and time
     }
-    
 }

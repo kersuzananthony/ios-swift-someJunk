@@ -9,16 +9,17 @@
 import UIKit
 import CoreData
 
-class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet weak var storePicker: UIPickerView!
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var priceField: UITextField!
     @IBOutlet weak var detailsField: UITextField!
+    @IBOutlet weak var selectImageButton: UIButton!
+    @IBOutlet weak var itemImageView: UIImageView!
     
     var stores: [Store] = [Store]()
     var itemToEdit: Item?
-    var itemImage: Image?
     
     var imagePickerViewController: UIImagePickerController!
     
@@ -27,10 +28,17 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         
         self.storePicker.delegate = self
         self.storePicker.dataSource = self
-        
-        getStores()
+        self.titleField.delegate = self
+        self.priceField.delegate = self
+        self.detailsField.delegate = self
+    
         manageEditForm()
 
+        self.imagePickerViewController = UIImagePickerController()
+        self.imagePickerViewController.delegate = self
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ItemDetailsVC.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         
 //        let store1 = NSEntityDescription.insertNewObjectForEntityForName("Store", inManagedObjectContext: appDelegate.managedObjectContext) as! Store
 //        store1.name = "Casino"
@@ -51,6 +59,24 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
 //        store6.name = "Jing Dong"
 //        
 //        appDelegate.saveContext()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        getStores()
+        self.storePicker.reloadAllComponents()
+    }
+    
+    // MARK: Dismiss Keyboard
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        titleField.resignFirstResponder()
+        priceField.resignFirstResponder()
+        detailsField.resignFirstResponder()
+        return true
     }
     
     func getStores() {
@@ -83,6 +109,11 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
             if let store = item.store, let index = stores.indexOf(store) {
                 self.storePicker.selectRow(index, inComponent: 0, animated: false)
             }
+            
+            if let image = item.image?.getItemImg() {
+                self.itemImageView.image = image
+                self.selectImageButton.setImage(nil, forState: UIControlState.Normal)
+            }
         }
     }
     
@@ -113,12 +144,25 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    @IBAction func addImagePressed(sender: UIButton) {
+        self.imagePickerViewController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        
+        // Hide the background of button
+        self.selectImageButton.setImage(nil, forState: .Normal)
+        
+        self.presentViewController(imagePickerViewController, animated: true, completion: nil)
+    }
+    
     @IBAction func savePressed(sender: UIButton) {
         if validateForm() {
             var item: Item!
+            var image: Image!
             
             if self.itemToEdit == nil {
                 item = NSEntityDescription.insertNewObjectForEntityForName("Item", inManagedObjectContext: appDelegate.managedObjectContext) as! Item
+                image = NSEntityDescription.insertNewObjectForEntityForName("Image", inManagedObjectContext: appDelegate.managedObjectContext) as! Image
+                
+                item.image = image
             } else {
                 item = itemToEdit
             }
@@ -127,6 +171,11 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
             item.details = detailsField.text
             item.price = NSString(string: priceField.text!).doubleValue
             item.store = stores[self.storePicker.selectedRowInComponent(0)]
+            
+            // Manage image
+            if let itemImage = itemImageView.image {
+                item.image?.setItemImage(itemImage)
+            }
             
             // Save the context
             appDelegate.saveContext()
@@ -175,3 +224,24 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         self.presentViewController(alertController, animated: true, completion: nil)
     }
 }
+
+extension ItemDetailsVC : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        self.itemImageView.image = image
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        UIImageWriteToSavedPhotosAlbum(image, nil, #selector(ItemDetailsVC.finish), nil)
+    }
+    
+    func finish() {
+        print("finished")
+    }
+}
+
+
+
+
+
+

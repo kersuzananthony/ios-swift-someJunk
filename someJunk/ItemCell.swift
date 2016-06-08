@@ -19,5 +19,9 @@ class ItemCell: UITableViewCell {
         self.titleLabel.text = item.title
         self.priceLabel.text = "$\(item.price!)"
         self.detailsLabel.text = item.details
+    
+        if let image = item.image?.getItemImg() {
+            self.thumbImageView.image = image
+        }
     }
 }
