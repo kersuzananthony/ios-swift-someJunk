@@ -65,6 +65,8 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     func getStores() {
         let fetchRequest = NSFetchRequest(entityName: "Store")
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
         
         do {
             self.stores = try appDelegate.managedObjectContext.executeFetchRequest(fetchRequest) as! [Store]
